@@ -1,3 +1,25 @@
+models:
+  - "gemma2:2b"
+  - "granite-code:3b"
+  - "qwen2.5-coder:3b"
+  - "llama3.2:3b"
+
+temperature: 0.2
+max_length: 512
+
+source_files:
+  - "src/simple.py"
+  - "src/intermediate.py"
+  - "src/advanced.py"
+
+evaluation:
+  coverage_threshold: 50
+
+strategy:
+  - "Few-Shot"
+  - "Chain of Thought"
+  - "Self Consistency"
+
 prompts:
   - name: state_transition_testing
     instruction: |
