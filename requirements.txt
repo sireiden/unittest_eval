@@ -1,0 +1,5 @@
+PyYAML
+psutil
+pytest
+coverage
+ollama
