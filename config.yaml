@@ -21,174 +21,162 @@ strategy:
   - "Self Consistency"
 
 prompts:
-  - name: state_transition_testing
+  - name: spec_cross_check
     instruction: |
-      Model <<CODE>> as a state machine. Identify 5 critical state transitions.
-      For each transition: 
-      1. Define pre/post-conditions
-      2. Create pytest tests with @pytest.mark.parametrize
-      3. Include edge state transitions
-      Explain coverage goals for each test.
+      Create pytest tests for <<CODE>> then:
+      1. Generate a specification table mapping requirements to test cases
+      2. Cross-verify each test against 3 codebase invariants
+      3. Add validation comments showing spec-test alignment
+      4. Flag any test/spec mismatches with pytest.fail(reason)
 
-  - name: fuzz_testing_strategy
+  - name: round_trip_verification
     instruction: |
-      Design a fuzz testing harness for <<CODE>> using hypothesis.
-      Generate 3 input generation strategies covering:
-      - Valid/invalid type combinations
-      - Extreme value ranges
-      - Structured payload variations
-      Create tests verifying system resilience.
+      First write tests for <<CODE>>, then:
+      1. Reverse-engineer requirements from the tests
+      2. Generate new tests from derived requirements
+      3. Compare original/reverse-engineered test suites
+      4. Create consistency report using pytest-diff
 
-  - name: test_flakiness_analysis
+  - name: conflict_detection
     instruction: |
-      Analyze <<CODE>> for potential test flakiness sources. Identify:
-      1. 3 Non-deterministic code paths
-      2. 2 Timing dependencies
-      3. 1 Environmental assumption
-      Create hardened tests with retries/verification.
+      Create 5 test variants for <<CODE>>, then:
+      1. Identify conflicting assumptions between tests
+      2. Add @pytest.mark.parametrize merging valid cases
+      3. Generate conflict matrix showing pairwise compatibility
+      4. Verify mutual exclusivity with hypothesis plugin
 
-  - name: cross_browser_validation
+  - name: version_consistency
     instruction: |
-      Create cross-environment tests for <<CODE>> using pytest-selenium.
-      Define 4 browser/OS combinations and 2 mobile resolutions.
-      Implement visual regression tests with per-test thresholds.
+      Write tests for <<CODE>> including:
+      1. @pytest.mark.parametrize with current/previous versions
+      2. Semantic version compatibility checks
+      3. Backward compatibility assertions
+      4. Generate version drift report using pytest-html
 
-  - name: accessibility_verification
+  - name: coverage_validation
     instruction: |
-      Test <<CODE>> for WCAG compliance using axe-selenium-python.
-      Identify 5 accessibility concern areas in UI components.
-      Create pytest tests checking for:
-      - ARIA labels
-      - Color contrast
-      - Keyboard navigation
-      - Screen reader compatibility
+      Create test suite then:
+      1. Generate coverage heatmap with pytest-cov
+      2. Write compensating tests for low-coverage areas
+      3. Verify coverage consistency across 3 runs
+      4. Add coverage threshold assertions
 
-  - name: regulatory_compliance
+  - name: golden_master
     instruction: |
-      Identify 3 industry regulations applicable to <<CODE>> (GDPR, HIPAA, PCI-DSS).
-      Create audit tests verifying:
-      - Data encryption
-      - Audit trails
-      - Access controls
-      - Data retention policies
-      Show compliance evidence collection.
+      For <<CODE>>:
+      1. Create golden master test with known-good outputs
+      2. Generate 5 mutated test variants
+      3. Run differential consistency checks
+      4. Add SHA-256 hash verification of results
 
-  - name: backward_compatibility
+  - name: multi_impl_check
     instruction: |
-      Design compatibility tests for <<CODE>> covering:
-      1. 2 Previous API versions
-      2. 3 Deprecated feature paths
-      3. 1 Major dependency version
-      Use pytest-dependency and version parameterization.
+      Test <<CODE>> against:
+      1. 3 alternative implementations
+      2. Reference results comparison
+      3. Statistical consistency checks
+      4. Add @pytest.mark.parametrize impl matrix
 
-  - name: user_journey_simulation
+  - name: invariant_checks
     instruction: |
-      Model 3 key user journeys through <<CODE>>.
-      Create end-to-end pytest tests with:
-      - Journey step validation
-      - Session persistence checks
-      - Error recovery scenarios
-      - Performance budgets
+      Create tests that:
+      1. Document 5 core invariants in docstrings
+      2. Verify invariant preservation
+      3. Generate invariant violation scenarios
+      4. Add property-based testing with hypothesis
 
-  - name: logging_verification
+  - name: id_consistency
     instruction: |
-      Test <<CODE>>'s logging system by:
-      1. Injecting test messages
-      2. Verifying log formats
-      3. Checking sensitive data masking
-      Create pytest tests with log analysis fixtures.
+      Develop tests with:
+      1. Structured test ID convention
+      2. Automated ID format validation
+      3. Namespaced parametrized IDs
+      4. Add pytest --collect-only consistency check
 
-  - name: error_recovery_testing
+  - name: change_impact
     instruction: |
-      Identify 5 failure domains in <<CODE>>.
-      Create chaos engineering tests using pytest-chaos that:
-      1. Inject network failures
-      2. Simulate database outages
-      3. Force garbage collection
-      Verify recovery automation.
+      For <<CODE>>:
+      1. Generate baseline test results
+      2. Create code mutation variants
+      3. Run differential impact analysis
+      4. Add @pytest.mark.flaky for change detection
 
-  - name: dependency_upgrade_safety
+  - name: input_mutation
     instruction: |
-      Create dependency matrix tests for <<CODE>> covering:
-      1. 3 Python versions
-      2. 2 OS platforms
-      3. 4 Critical library versions
-      Use tox and pytest-base-url for matrix testing.
+      Create tests that:
+      1. Generate original inputs
+      2. Apply 3 mutation strategies
+      3. Verify output consistency
+      4. Add fuzzing with pytest-fuzz
 
-  - name: cross_platform_validation
+  - name: temporal_consistency
     instruction: |
-      Test <<CODE>> on 3 platforms (Windows, Linux, macOS) with:
-      1. Filesystem path tests
-      2. Encoding compatibility checks
-      3. Service management verification
-      Implement platform-specific test markers.
+      Design tests that:
+      1. Run in shuffled order 5 times
+      2. Check for temporal dependencies
+      3. Add @pytest.mark.repeat(10)
+      4. Verify stateless consistency
 
-  - name: scalability_testing
+  - name: schema_validation
     instruction: |
-      Design scalability tests for <<CODE>> using pytest-locust.
-      Create load scenarios for:
-      1. 10x normal load
-      2. Gradual ramp-up
-      3. Sustained peak load
-      Define SLO thresholds and failure conditions.
+      For <<CODE>> outputs:
+      1. Generate JSON Schema
+      2. Create schema compliance tests
+      3. Add @pytest.mark.parametrize edge cases
+      4. Verify schema-test bidirectional consistency
 
-  - name: dynamic_analysis_integration
+  - name: parametrization_audit
     instruction: |
-      Integrate dynamic analysis into pytest for <<CODE>>:
-      1. Code coverage visualization
-      2. Runtime type checking
-      3. Memory leak detection
-      4. Race condition monitoring
-      Create CI/CD report generation tests.
+      Review test parameters:
+      1. Create input space map
+      2. Verify partition completeness
+      3. Add missing boundary cases
+      4. Generate parameter coverage report
 
-  - name: test_data_generation
+  - name: exception_consistency
     instruction: |
-      Create data-driven tests for <<CODE>> using Faker:
-      1. Generate 100+ test datasets
-      2. Verify data sanitization
-      3. Check idempotent processing
-      Implement pytest factories with seed control.
+      Test error handling:
+      1. Catalog exception hierarchy
+      2. Verify error type propagation
+      3. Check message template consistency
+      4. Add @pytest.mark.parametrize error chain
 
-  - name: config_validation
+  - name: resource_consistency
     instruction: |
-      Test <<CODE>>'s configuration system with:
-      1. 5 Invalid config permutations
-      2. Environment variable overrides
-      3. Secret management verification
-      Use pytest-env and config schema validation.
+      For resource-heavy tests:
+      1. Track file handles/memory usage
+      2. Add leak detection fixtures
+      3. Verify pre/post state equivalence
+      4. Generate resource audit report
 
-  - name: documentation_parsing
+  - name: doc_consistency
     instruction: |
-      Create tests that validate <<CODE>> against OpenAPI/Swagger specs.
-      Include:
-      1. Parameter schema checks
-      2. Response model validation
-      3. Example verification
-      Use pytest-openapi and example generation.
+      Align tests with docs:
+      1. Parse function docstrings
+      2. Generate test cases from examples
+      3. Verify test-doc consistency
+      4. Add doctest comparison with pytest --doctest-modules
 
-  - name: chaos_engineering
+  - name: perf_consistency
     instruction: |
-      Implement chaos tests for <<CODE>> using pytest-gremlins:
-      1. Memory allocation failures
-      2. I/O latency spikes
-      3. Clock skew scenarios
-      4. DNS failures
-      Define steady-state hypothesis.
+      Validate performance:
+      1. Establish baseline metrics
+      2. Run statistical consistency checks
+      3. Add CI/CD performance gates
+      4. Generate pytest-benchmark histograms
 
-  - name: audit_trail_verification
+  - name: security_consistency
     instruction: |
-      Create audit testing for <<CODE>> verifying:
-      1. Immutable logs
-      2. User action tracing
-      3. GDPR right-to-be-forgotten
-      4. Non-repudiation proofs
-      Use cryptographic verification in tests.
+      Security test validation:
+      1. Replay historical vulnerabilities
+      2. Verify remediation persistence
+      3. Add OWASP consistency checks
+      4. Generate attack matrix report
 
-  - name: contract_evolution
+  - name: boundary_consistency
     instruction: |
-      Design pact tests for <<CODE>> using pytest-pact:
-      1. Consumer contract validation
-      2. Provider state management
-      3. Version compatibility checks
-      4. Breaking change detection
-      Show contract verification workflow.
+      Audit boundary handling:
+      1. Map declared vs tested boundaries
+      2. Generate out-of-bound test cases
+      3. Verify error consistency
+      4. Add @pytest.mark.parametrize overflow checks
