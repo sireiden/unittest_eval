@@ -35,7 +35,6 @@ class EvaluationDataGatherer:
 
         self.models = self.config["models"]
         self.source_files = self.config["source_files"]
-        self.prompt_template = self.config["prompt_template"]
         self.prompts = self.config["prompts"]
 
         raw_strategies = self.config.get("strategy", [])
@@ -94,8 +93,7 @@ class EvaluationDataGatherer:
 
                     for source_file in self.source_files:
                         code_snippet = self._read_file(source_file)
-                        final_prompt = self.prompt_template + "\n\n" + prompt_instruction
-                        final_prompt = final_prompt.replace("<<CODE>>", code_snippet)
+                        final_prompt = prompt_instruction.replace("<<CODE>>", code_snippet)
 
                         (test_path, gen_time, mem_usage, cpu_usage, syntax_errors) = \
                             self._generate_test(
