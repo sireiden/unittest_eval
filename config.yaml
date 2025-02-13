@@ -1,0 +1,172 @@
+prompts:
+  - name: state_transition_testing
+    instruction: |
+      Model <<CODE>> as a state machine. Identify 5 critical state transitions.
+      For each transition: 
+      1. Define pre/post-conditions
+      2. Create pytest tests with @pytest.mark.parametrize
+      3. Include edge state transitions
+      Explain coverage goals for each test.
+
+  - name: fuzz_testing_strategy
+    instruction: |
+      Design a fuzz testing harness for <<CODE>> using hypothesis.
+      Generate 3 input generation strategies covering:
+      - Valid/invalid type combinations
+      - Extreme value ranges
+      - Structured payload variations
+      Create tests verifying system resilience.
+
+  - name: test_flakiness_analysis
+    instruction: |
+      Analyze <<CODE>> for potential test flakiness sources. Identify:
+      1. 3 Non-deterministic code paths
+      2. 2 Timing dependencies
+      3. 1 Environmental assumption
+      Create hardened tests with retries/verification.
+
+  - name: cross_browser_validation
+    instruction: |
+      Create cross-environment tests for <<CODE>> using pytest-selenium.
+      Define 4 browser/OS combinations and 2 mobile resolutions.
+      Implement visual regression tests with per-test thresholds.
+
+  - name: accessibility_verification
+    instruction: |
+      Test <<CODE>> for WCAG compliance using axe-selenium-python.
+      Identify 5 accessibility concern areas in UI components.
+      Create pytest tests checking for:
+      - ARIA labels
+      - Color contrast
+      - Keyboard navigation
+      - Screen reader compatibility
+
+  - name: regulatory_compliance
+    instruction: |
+      Identify 3 industry regulations applicable to <<CODE>> (GDPR, HIPAA, PCI-DSS).
+      Create audit tests verifying:
+      - Data encryption
+      - Audit trails
+      - Access controls
+      - Data retention policies
+      Show compliance evidence collection.
+
+  - name: backward_compatibility
+    instruction: |
+      Design compatibility tests for <<CODE>> covering:
+      1. 2 Previous API versions
+      2. 3 Deprecated feature paths
+      3. 1 Major dependency version
+      Use pytest-dependency and version parameterization.
+
+  - name: user_journey_simulation
+    instruction: |
+      Model 3 key user journeys through <<CODE>>.
+      Create end-to-end pytest tests with:
+      - Journey step validation
+      - Session persistence checks
+      - Error recovery scenarios
+      - Performance budgets
+
+  - name: logging_verification
+    instruction: |
+      Test <<CODE>>'s logging system by:
+      1. Injecting test messages
+      2. Verifying log formats
+      3. Checking sensitive data masking
+      Create pytest tests with log analysis fixtures.
+
+  - name: error_recovery_testing
+    instruction: |
+      Identify 5 failure domains in <<CODE>>.
+      Create chaos engineering tests using pytest-chaos that:
+      1. Inject network failures
+      2. Simulate database outages
+      3. Force garbage collection
+      Verify recovery automation.
+
+  - name: dependency_upgrade_safety
+    instruction: |
+      Create dependency matrix tests for <<CODE>> covering:
+      1. 3 Python versions
+      2. 2 OS platforms
+      3. 4 Critical library versions
+      Use tox and pytest-base-url for matrix testing.
+
+  - name: cross_platform_validation
+    instruction: |
+      Test <<CODE>> on 3 platforms (Windows, Linux, macOS) with:
+      1. Filesystem path tests
+      2. Encoding compatibility checks
+      3. Service management verification
+      Implement platform-specific test markers.
+
+  - name: scalability_testing
+    instruction: |
+      Design scalability tests for <<CODE>> using pytest-locust.
+      Create load scenarios for:
+      1. 10x normal load
+      2. Gradual ramp-up
+      3. Sustained peak load
+      Define SLO thresholds and failure conditions.
+
+  - name: dynamic_analysis_integration
+    instruction: |
+      Integrate dynamic analysis into pytest for <<CODE>>:
+      1. Code coverage visualization
+      2. Runtime type checking
+      3. Memory leak detection
+      4. Race condition monitoring
+      Create CI/CD report generation tests.
+
+  - name: test_data_generation
+    instruction: |
+      Create data-driven tests for <<CODE>> using Faker:
+      1. Generate 100+ test datasets
+      2. Verify data sanitization
+      3. Check idempotent processing
+      Implement pytest factories with seed control.
+
+  - name: config_validation
+    instruction: |
+      Test <<CODE>>'s configuration system with:
+      1. 5 Invalid config permutations
+      2. Environment variable overrides
+      3. Secret management verification
+      Use pytest-env and config schema validation.
+
+  - name: documentation_parsing
+    instruction: |
+      Create tests that validate <<CODE>> against OpenAPI/Swagger specs.
+      Include:
+      1. Parameter schema checks
+      2. Response model validation
+      3. Example verification
+      Use pytest-openapi and example generation.
+
+  - name: chaos_engineering
+    instruction: |
+      Implement chaos tests for <<CODE>> using pytest-gremlins:
+      1. Memory allocation failures
+      2. I/O latency spikes
+      3. Clock skew scenarios
+      4. DNS failures
+      Define steady-state hypothesis.
+
+  - name: audit_trail_verification
+    instruction: |
+      Create audit testing for <<CODE>> verifying:
+      1. Immutable logs
+      2. User action tracing
+      3. GDPR right-to-be-forgotten
+      4. Non-repudiation proofs
+      Use cryptographic verification in tests.
+
+  - name: contract_evolution
+    instruction: |
+      Design pact tests for <<CODE>> using pytest-pact:
+      1. Consumer contract validation
+      2. Provider state management
+      3. Version compatibility checks
+      4. Breaking change detection
+      Show contract verification workflow.
