@@ -21,162 +21,82 @@ strategy:
   - "Self Consistency"
 
 prompts:
-  - name: spec_cross_check
+  - name: "Assert-Based Self-Consistency"
     instruction: |
-      Create pytest tests for <<CODE>> then:
-      1. Generate a specification table mapping requirements to test cases
-      2. Cross-verify each test against 3 codebase invariants
-      3. Add validation comments showing spec-test alignment
-      4. Flag any test/spec mismatches with pytest.fail(reason)
+      Apply the self-consistency prompt engineering strategy by generating multiple candidate tests that use straightforward asserts in your test functions. Then, synthesize a final, most comprehensive test suite that covers all major functionalities in <<CODE>>.
 
-  - name: round_trip_verification
+  - name: "Edge Cases Exploration"
     instruction: |
-      First write tests for <<CODE>>, then:
-      1. Reverse-engineer requirements from the tests
-      2. Generate new tests from derived requirements
-      3. Compare original/reverse-engineered test suites
-      4. Create consistency report using pytest-diff
+      Use the self-consistency method to propose multiple unusual or extreme inputs for <<CODE>>, then converge on a suite of pytest cases that thoroughly tests edge behavior and corner cases.
 
-  - name: conflict_detection
+  - name: "Parameter Variations and Boundaries"
     instruction: |
-      Create 5 test variants for <<CODE>>, then:
-      1. Identify conflicting assumptions between tests
-      2. Add @pytest.mark.parametrize merging valid cases
-      3. Generate conflict matrix showing pairwise compatibility
-      4. Verify mutual exclusivity with hypothesis plugin
+      Enumerate different parameter values and boundary conditions for each function in <<CODE>> using the self-consistency approach. Compare these tests and unify them into a final suite that maximizes coverage of input ranges.
 
-  - name: version_consistency
+  - name: "Refactor and Compare"
     instruction: |
-      Write tests for <<CODE>> including:
-      1. @pytest.mark.parametrize with current/previous versions
-      2. Semantic version compatibility checks
-      3. Backward compatibility assertions
-      4. Generate version drift report using pytest-html
+      Generate potential refactor-based tests for <<CODE>> by analyzing potential refactoring pathways. Use self-consistency to unify these different test versions into a single, refined test suite ensuring code stability after refactors.
 
-  - name: coverage_validation
+  - name: "Mutation Testing Perspective"
     instruction: |
-      Create test suite then:
-      1. Generate coverage heatmap with pytest-cov
-      2. Write compensating tests for low-coverage areas
-      3. Verify coverage consistency across 3 runs
-      4. Add coverage threshold assertions
+      Envision how mutation testing might alter <<CODE>>. Generate multiple test sets designed to catch these mutations using a self-consistency approach. Merge the best ideas into a single robust test suite.
 
-  - name: golden_master
+  - name: "Pairwise Combinatorial Approach"
     instruction: |
-      For <<CODE>>:
-      1. Create golden master test with known-good outputs
-      2. Generate 5 mutated test variants
-      3. Run differential consistency checks
-      4. Add SHA-256 hash verification of results
+      Use self-consistency to generate pairwise input combinations for each function in <<CODE>>. Compare multiple sets of pairwise tests and converge on the highest coverage suite for pytest.
 
-  - name: multi_impl_check
+  - name: "Property-Based Testing"
     instruction: |
-      Test <<CODE>> against:
-      1. 3 alternative implementations
-      2. Reference results comparison
-      3. Statistical consistency checks
-      4. Add @pytest.mark.parametrize impl matrix
+      Brainstorm multiple property-based (Hypothesis) tests for each function in <<CODE>> using the self-consistency strategy. Evaluate each candidate test set for coverage and combine them into a final, refined suite.
 
-  - name: invariant_checks
+  - name: "Performance and Stress Tests"
     instruction: |
-      Create tests that:
-      1. Document 5 core invariants in docstrings
-      2. Verify invariant preservation
-      3. Generate invariant violation scenarios
-      4. Add property-based testing with hypothesis
+      Propose several approaches for performance and stress tests on <<CODE>>. Utilize self-consistency to compare these approaches and unify them into a final, robust performance-testing suite for pytest.
 
-  - name: id_consistency
+  - name: "Exception Handling and Fault Injection"
     instruction: |
-      Develop tests with:
-      1. Structured test ID convention
-      2. Automated ID format validation
-      3. Namespaced parametrized IDs
-      4. Add pytest --collect-only consistency check
+      Generate test scenarios that deliberately trigger errors and exceptions in <<CODE>>. Through self-consistency, select the most effective scenarios to ensure all exception paths are covered by pytest.
 
-  - name: change_impact
+  - name: "Mock and Patch Strategies"
     instruction: |
-      For <<CODE>>:
-      1. Generate baseline test results
-      2. Create code mutation variants
-      3. Run differential impact analysis
-      4. Add @pytest.mark.flaky for change detection
+      Brainstorm various ways to mock or patch dependencies within <<CODE>> using the self-consistency approach. Compare your mock testing approaches and synthesize a final, optimal set of unit tests.
 
-  - name: input_mutation
+  - name: "Test-Driven Development (TDD) Simulation"
     instruction: |
-      Create tests that:
-      1. Generate original inputs
-      2. Apply 3 mutation strategies
-      3. Verify output consistency
-      4. Add fuzzing with pytest-fuzz
+      Pretend to follow a TDD workflow for the functionalities in <<CODE>>. Use self-consistency to propose incremental test sets, merging them into a final high-coverage pytest suite that evolves as the code is built.
 
-  - name: temporal_consistency
+  - name: "Behavior-Driven Testing"
     instruction: |
-      Design tests that:
-      1. Run in shuffled order 5 times
-      2. Check for temporal dependencies
-      3. Add @pytest.mark.repeat(10)
-      4. Verify stateless consistency
+      Devise multiple scenarios capturing user stories for <<CODE>>. Using self-consistency, refine these BDD-style tests and finalize a comprehensive suite of given-when-then tests.
 
-  - name: schema_validation
+  - name: "Data-Driven Test Generation"
     instruction: |
-      For <<CODE>> outputs:
-      1. Generate JSON Schema
-      2. Create schema compliance tests
-      3. Add @pytest.mark.parametrize edge cases
-      4. Verify schema-test bidirectional consistency
+      Propose various data-driven tests for <<CODE>>, each with different datasets or configurations. Apply self-consistency to select the most relevant combinations that thoroughly test functionality.
 
-  - name: parametrization_audit
+  - name: "Regression Test Coverage"
     instruction: |
-      Review test parameters:
-      1. Create input space map
-      2. Verify partition completeness
-      3. Add missing boundary cases
-      4. Generate parameter coverage report
+      Imagine multiple regression scenarios for <<CODE>> that might be affected by updates. Use self-consistency to consolidate these regression tests into a thorough test suite that prevents old bugs from reoccurring.
 
-  - name: exception_consistency
+  - name: "Integration and Workflow Coverage"
     instruction: |
-      Test error handling:
-      1. Catalog exception hierarchy
-      2. Verify error type propagation
-      3. Check message template consistency
-      4. Add @pytest.mark.parametrize error chain
+      Brainstorm multiple ways the components in <<CODE>> might integrate. Using self-consistency, unify these integration test ideas to ensure the entire workflow is verified in pytest.
 
-  - name: resource_consistency
+  - name: "Functional vs. Structural"
     instruction: |
-      For resource-heavy tests:
-      1. Track file handles/memory usage
-      2. Add leak detection fixtures
-      3. Verify pre/post state equivalence
-      4. Generate resource audit report
+      Generate sets of tests focusing on functional coverage, then propose structural (code-level) coverage tests for <<CODE>>. Apply self-consistency to merge these into one unified suite maximizing coverage.
 
-  - name: doc_consistency
+  - name: "Scenario-Based Testing"
     instruction: |
-      Align tests with docs:
-      1. Parse function docstrings
-      2. Generate test cases from examples
-      3. Verify test-doc consistency
-      4. Add doctest comparison with pytest --doctest-modules
+      Devise multiple real-world scenarios to test <<CODE>>. Through self-consistency, refine and converge on the final scenario-based suite that ensures every pathway is tested.
 
-  - name: perf_consistency
+  - name: "Hybrid Testing with Randomized Inputs"
     instruction: |
-      Validate performance:
-      1. Establish baseline metrics
-      2. Run statistical consistency checks
-      3. Add CI/CD performance gates
-      4. Generate pytest-benchmark histograms
+      Create candidate strategies blending standard unit tests with random input generation for <<CODE>>. Use self-consistency to resolve conflicting test designs into a single, thorough suite.
 
-  - name: security_consistency
+  - name: "Incremental Complexity"
     instruction: |
-      Security test validation:
-      1. Replay historical vulnerabilities
-      2. Verify remediation persistence
-      3. Add OWASP consistency checks
-      4. Generate attack matrix report
+      Generate tests incrementally, starting from the simplest possible inputs up to very complex ones for <<CODE>>. Utilize self-consistency to merge these incremental ideas into a final, comprehensive test suite.
 
-  - name: boundary_consistency
+  - name: "Validation and Verification of Assumptions"
     instruction: |
-      Audit boundary handling:
-      1. Map declared vs tested boundaries
-      2. Generate out-of-bound test cases
-      3. Verify error consistency
-      4. Add @pytest.mark.parametrize overflow checks
+      List multiple assumptions the code in <<CODE>> might rely on. Propose tests for each assumption using the self-consistency strategy, then finalize a pytest suite ensuring all assumptions are valid and verified.
