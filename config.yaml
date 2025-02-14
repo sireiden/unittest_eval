@@ -16,8 +16,6 @@ evaluation:
   coverage_threshold: 50
 
 strategy:
-  - "Few-Shot"
-  - "Chain of Thought"
   - "Self Consistency"
 
 prompts:
