@@ -1,0 +1,22 @@
+# Frama-C Variable Access Counter Plugin
+
+opam-version: "2.0"
+name: "frama-c-var-access-counter"
+version: "1.0.0"
+synopsis: "Frama-C plugin for comprehensive variable access analysis"
+description: """
+This plugin enhances the Frama-C static analysis framework to provide 
+comprehensive variable access detection and statistics for C code analysis.
+It tracks variable reads and writes with enhanced identification including
+filename and function context.
+"""
+depends: [
+  "frama-c" {>= "29.0"}
+  "ocaml" {>= "4.14"}
+]
+build: [
+  ["make"]
+]
+install: [
+  ["make" "install"]
+]
