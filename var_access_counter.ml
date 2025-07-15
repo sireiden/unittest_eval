@@ -12,7 +12,8 @@ module VarAccessCounter = struct
   
   (* Helper function to get filename from location *)
   let get_filename loc =
-    Filepath.Normalized.to_string (fst loc).Lexing.pos_fname
+    let filename = (fst loc).Lexing.pos_fname in
+    Filename.basename filename
   
   (* Helper function to increment counter *)
   let increment_counter table var_id =
@@ -128,6 +129,5 @@ end
 (* Plugin registration *)
 let () =
   Db.Main.extend (fun () ->
-    if Kernel.is_debug_key_enabled Kernel.dkey_parser then
-      VarAccessCounter.analyze_file ()
+    VarAccessCounter.analyze_file ()
   )

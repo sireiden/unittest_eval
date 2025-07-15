@@ -1,0 +1,32 @@
+# OCaml compilation artifacts
+*.cmo
+*.cmx
+*.cmi
+*.o
+*.cma
+*.cmxa
+*.a
+
+# Frama-C specific
+*.why
+*.jessie
+*.ann
+
+# Build artifacts
+_build/
+dist/
+
+# Temporary files
+*~
+*.tmp
+syntax_test.ml
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
